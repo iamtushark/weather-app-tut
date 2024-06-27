@@ -15,7 +15,7 @@ export default function PlaceSelector({ city, setCity }: placeSelectorProps) {
     [citiesData],
   );
 
-  const [selectedCity, setSelectedCity] = useState<string>("");
+  const [selectedCity, setSelectedCity] = useState<string>(city);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const selectedCity = event.target.value as string;
