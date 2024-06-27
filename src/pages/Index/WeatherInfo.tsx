@@ -48,6 +48,10 @@ function CityInfoComponent({ city }: CityInfoComponentProps) {
   }, [city]);
 
   useEffect(() => {
+    setInterval(()=> fetchCityInfo, 600000);
+  }, [])
+
+  useEffect(() => {
     setAvgTemp(calculateAvgTemp);
   }, [calculateAvgTemp]);
 
