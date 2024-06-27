@@ -1,3 +1,4 @@
+import React, { ForwardedRef, forwardRef } from "react";
 import {
   FormControl,
   InputLabel,
@@ -13,33 +14,29 @@ interface CommonDropdownProps {
   options: Array<{ value: string | number; label: string }>;
   error?: boolean;
   helperText?: string;
-  onChange: (
-    event: SelectChangeEvent<string | number>,
-    child: React.ReactNode,
-  ) => void;
+  // Add a definitive type below
+  onChange: any;
 }
 
-const CommonDropdown: React.FC<CommonDropdownProps> = ({
-  label,
-  value,
-  options,
-  error,
-  onChange,
-  helperText,
-}) => {
-  return (
-    <FormControl variant="filled" error={error} fullWidth>
-      <InputLabel>{label}</InputLabel>
-      <Select value={value} onChange={onChange} label={label}>
-        {options.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </Select>
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
-    </FormControl>
-  );
-};
+const CommonDropdown = forwardRef(
+  (
+    { label, value, options, error, onChange, helperText }: CommonDropdownProps,
+    ref: ForwardedRef<HTMLSelectElement>,
+  ) => {
+    return (
+      <FormControl variant="filled" error={error} fullWidth>
+        <InputLabel>{label}</InputLabel>
+        <Select value={value} onChange={onChange} label={label} inputRef={ref}>
+          {options.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+        {helperText && <FormHelperText>{helperText}</FormHelperText>}
+      </FormControl>
+    );
+  },
+);
 
 export default CommonDropdown;
