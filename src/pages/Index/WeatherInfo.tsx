@@ -15,10 +15,10 @@ function CityInfoComponent({ city }: CityInfoComponentProps) {
 
   const calculateAvgTemp = useMemo(() => {
     if (maxTemp && minTemp) {
-      return ((parseFloat(maxTemp) + parseFloat(minTemp)) / 2).toFixed(2);
+      return ((parseFloat(maxTemp) + parseFloat(minTemp)) / 2).toFixed(1);
     }
     return null;
-  }, [city]);
+  }, [maxTemp,minTemp]);
 
   const fetchCityInfo = useCallback(async () => {
     if (!city) return;
